@@ -1,4 +1,4 @@
-const { getDoctor, createDoctor } = require("@/controllers/docter.controller");
+const { getDoctor, createDoctor } = require("@/controllers/doctor.controller");
 const {
   doctorValidation,
   checkDuplicate,

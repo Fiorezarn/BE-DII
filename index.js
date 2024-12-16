@@ -5,7 +5,7 @@ const app = express();
 const bodyParser = require("body-parser");
 const port = process.env.PORT || 3000;
 const baseUrl = process.env.BASE_URL;
-const docterRoute = require("@/routes/docter.route");
+const doctorRoute = require("@/routes/doctor.route");
 const scheduleRoute = require("@/routes/schedule.route");
 const authRoute = require("@/routes/auth.route");
 const dotenv = require("dotenv");
@@ -21,6 +21,6 @@ app.listen(port, () => {
   console.log(`Server running on ${baseUrl}:${port}`);
 });
 
-app.use("/doctor", authentication, docterRoute);
+app.use("/doctor", authentication, doctorRoute);
 app.use("/schedule", authentication, scheduleRoute);
 app.use("/auth", authRoute);
