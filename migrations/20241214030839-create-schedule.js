@@ -19,7 +19,8 @@ module.exports = {
           "wednesday",
           "thursday",
           "friday",
-          "saturday"
+          "saturday",
+          "sunday"
         ),
       },
       time_start: {

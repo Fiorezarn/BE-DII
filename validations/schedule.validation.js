@@ -30,29 +30,21 @@ const checkDuplicate = async (req, res, next) => {
     const { doctorId, day, time_start, time_finish, start_date, end_date } =
       req.body;
 
-    const daterange = getDatesByDay(start_date, end_date, day);
+    const existingSchedule = await Schedule.findOne({
+      where: {
+        [Op.and]: [
+          { doctorId: doctorId },
+          { day: day },
+          { time_start: time_start },
+          { time_finish: time_finish },
+        ],
+      },
+    });
 
-    for (const date of daterange) {
-      const existingSchedule = await Schedule.findOne({
-        where: {
-          [Op.and]: [
-            { doctorId: doctorId },
-            { day: day },
-            { date: date },
-            { time_start: time_finish },
-            { time_finish: time_start },
-          ],
-        },
-      });
-
-      if (existingSchedule) {
-        return errorClientResponse(
-          res,
-          `Schedule already exists on ${date} from ${time_start} to ${time_finish}.`,
-          400
-        );
-      }
+    if (existingSchedule) {
+      return errorClientResponse(res, `Schedule already exists`, 400);
     }
+
     next();
   } catch (error) {
     console.error("Error checking duplicates:", error);

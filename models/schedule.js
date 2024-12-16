@@ -26,7 +26,8 @@ module.exports = (sequelize, DataTypes) => {
           "wednesday",
           "thursday",
           "friday",
-          "saturday"
+          "saturday",
+          "sunday"
         ),
       },
       time_start: { type: DataTypes.TIME },
